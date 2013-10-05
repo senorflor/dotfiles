@@ -2,6 +2,9 @@
 
 # bash_paths
 
+# Language-specific paths
+GOPATH="$HOME/go"
+
 # Directories to be prepended to PATH
 declare -a dirs_to_prepend=(
     "/usr/local/bin" # Ensure that this bin always takes precedence over `/usr/bin`
@@ -15,6 +18,7 @@ declare -a dirs_to_append=(
     "$HOME/.rvm/bin"
     "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
+    "$GOPATH/bin"
 )
 
 # Prepend directories to PATH
@@ -38,3 +42,4 @@ done
 unset dirs_to_prepend dirs_to_append
 
 export PATH
+export GOPATH
