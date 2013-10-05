@@ -1,6 +1,8 @@
 # Dotfiles (Patrick Flor)
 
-My OS X dotfiles.
+My OS X dotfiles, based on
+[necolas's amazing repo](https://github.com/necolas/dotfiles). Not
+much of a diff besides the emacs stuff.
 
 
 ## How to install
@@ -248,7 +250,11 @@ changes made to those submodules.
 
 ## Acknowledgements
 
-Inspiration and code was taken from many sources, including:
+* [@necolas](https://github.com/) (Nicolas Gallagher)
+  [https://github.com/necolas/dotfiles](https://github.com/necolas/dotfiles)
+
+
+## Acknowledgements*
 
 * [@mathiasbynens](https://github.com/mathiasbynens) (Mathias Bynens)
   [https://github.com/mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
