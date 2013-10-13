@@ -7,6 +7,7 @@ declare -a files=(
     $HOME/.dotfiles/bash/bash_options # Options
     $HOME/.dotfiles/bash/bash_exports # Exports
     $HOME/.dotfiles/bash/bash_aliases # Aliases
+    $HOME/.dotfiles/bash/bash_eliases # For Eli
     $HOME/.dotfiles/bash/functions/* # Functions
     $HOME/.dotfiles/bash/bash_prompt # Custom bash prompt
     $HOME/.bash_profile.local # Local and private settings not under version control (e.g. git credentials)
