@@ -41,7 +41,10 @@
 
                    ;; Project nav
                       ack-and-a-half
-                      projectile)
+                      projectile
+
+                   ;; R
+                      ess)
   "Packages required at launchtime")
 
 (dolist (p my-packages)
