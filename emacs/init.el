@@ -28,7 +28,7 @@
                       clojure-mode
                       clojure-test-mode
                       clojurescript-mode
-                      nrepl
+                      cider
 
                    ;; Go
                       go-mode
@@ -68,7 +68,6 @@
 (yas-global-mode 1)
 
 ;;; Clojure
-; if you want to turn paredit off:
 (add-hook 'clojure-mode-hook 'paredit-mode)
 ;; Clojurescript/EDN highlighting
 (setq auto-mode-alist (cons '("\\.edn$" . clojure-mode) auto-mode-alist))  ; *.edn are Clojure files
@@ -79,6 +78,13 @@
  (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
  (eval-after-load "auto-complete"
    '(add-to-list 'ac-modes 'nrepl-mode))
+;;; cider config
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-display-in-current-window t)
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 ;;; org mode!
 (require 'org-install)
