@@ -20,3 +20,6 @@ Thumbs.db
 *.sass-cache
 *.sw?
 *.vi
+
+# rbenv tweak
+vendor/bundle

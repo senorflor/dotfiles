@@ -27,6 +27,7 @@ run_brew() {
             'node'
             'optipng'
             'phantomjs'
+            'rbenv'
             'tree'
             'wget'
             'emacs --cocoa --with-gnutls --srgb'

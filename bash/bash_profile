@@ -3,7 +3,6 @@
 # bash_profile
 
 declare -a files=(
-    $HOME/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
     $HOME/.dotfiles/bash/bash_options # Options
     $HOME/.dotfiles/bash/bash_exports # Exports
     $HOME/.dotfiles/bash/bash_aliases # Aliases
@@ -31,3 +30,6 @@ bash_completion_path="$(brew --prefix)/etc/bash_completion"
 if [[ -r $bash_completion_path ]]; then
     source $bash_completion_path
 fi
+
+# start rbenv
+eval "$(rbenv init -)"
