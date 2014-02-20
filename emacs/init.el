@@ -36,7 +36,10 @@
                    ;; Haskell
                       haskell-mode
 
-                   ;; Markdown
+                   ;; Java
+                      malabar-mode
+
+                      ;; Markdown
                       markdown-mode
 
                    ;; Project nav
@@ -87,6 +90,20 @@
 (add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+
+;;; Java
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-basic-offset 2)))
+(add-to-list 'load-path "~/.emacs.d/malabar-1.5.0-SNAPSHOT/lisp/")
+(setq semantic-default-submodes '(global-semantic-idle-scheduler-mode
+                                  global-semanticdb-minor-mode
+                                  global-semantic-idle-summary-mode
+                                  global-semantic-mru-bookmark-mode))
+(semantic-mode 1)
+(require 'malabar-mode)
+(setq malabar-groovy-lib-dir "~/.emacs.d/malabar-1.5.0-SNAPSHOT/lib/")
+(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 ;;; org mode!
 (require 'org-install)
