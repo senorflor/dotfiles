@@ -2,7 +2,7 @@
 
 add () {
     # Given a field separator and n, add the nth field for all lines in stdout
-    awk -v FS=$1 -v N=$2 '{ print $N }' | paste -sd+ - | bc
+    awk -v FS=$1 -v N=$2 '{ SUM += $N } END { print SUM }'
 }
 
 average () {
