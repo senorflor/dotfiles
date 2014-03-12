@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+add () {
+    # Given a field separator and n, add the nth field for all lines in stdout
+    awk -v FS=$1 -v N=$2 '{ print $N }' | paste -sd+ - | bc
+}
+
+average () {
+    # Given a field separator and n, average the nth field for all lines in stdout
+    awk -v FS=$1 -v N=$2 '{ SUM += $N; COUNT += 1 } END { print SUM/COUNT }'
+}
