@@ -21,6 +21,7 @@
                       powerline
                       rainbow-delimiters
                       undo-tree
+                      yaml-mode
                       yasnippet
 
                    ;; Clojure
@@ -39,7 +40,7 @@
                    ;; Java
                       malabar-mode
 
-                      ;; Markdown
+                   ;; Markdown
                       markdown-mode
 
                    ;; Project nav
@@ -129,6 +130,11 @@
 ;;; haskell
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-to-list 'completion-ignored-extensions ".hi")
+
+
+;;; dash-at-point
+(require 'dash-at-point)
+(global-set-key "\C-c\C-\M-d" 'dash-at-point)
 
 ;;; detab, and tab = 2 spaces
 (setq-default indent-tabs-mode nil)

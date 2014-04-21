@@ -19,6 +19,7 @@ declare -a dirs_to_append=(
     "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
     "$GOPATH/bin"
+    "~/.cabal/bin"
 )
 
 # Prepend directories to PATH
