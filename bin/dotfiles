@@ -149,8 +149,10 @@ mirrorfiles() {
     link "iterm/solarized.dark.itermcolors.txt" "solarized.dark.itermcolors.txt"
 
     # Just cramming stuff in here now :) TODO: break this out
-    if [ -d "${HOME}/Library/Application\ Support/Karabiner" ]; then
-        link "karabiner/private.xml" "Library/Application\ Support/Karabiner/private.xml"
+    karabiner_dir="Library/Application Support/Karabiner"
+    if [ -d "${HOME}/${karabiner_dir}" ]; then
+        rm -f "${karabiner_dir}/private.xml"
+        link "karabiner/private.xml" "${karabiner_dir}/private.xml"
     fi
 
 
