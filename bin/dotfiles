@@ -148,6 +148,12 @@ mirrorfiles() {
     # iTerm won't pick up a dot-prefixed file for whatever reason
     link "iterm/solarized.dark.itermcolors.txt" "solarized.dark.itermcolors.txt"
 
+    # Just cramming stuff in here now :) TODO: break this out
+    if [ -d "${HOME}/Library/Application\ Support/Karabiner" ]; then
+        link "karabiner/private.xml" "Library/Application\ Support/Karabiner/private.xml"
+    fi
+
+
     e_success "Dotfiles update complete!"
 }
 
