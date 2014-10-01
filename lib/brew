@@ -25,6 +25,7 @@ run_brew() {
             'jpeg'
             'macvim --override-system-vim'
             'node'
+            'npm'
             'optipng'
             'phantomjs'
             'rbenv'
