@@ -61,3 +61,10 @@ formula_exists() {
     e_warning "Missing formula: $1"
     return 1
 }
+
+# Test whether a directory exists and make it if not
+ensure_dir() {
+    if [ ! -d "$1" ]; then
+        mkdir -p "$1"
+    fi
+}

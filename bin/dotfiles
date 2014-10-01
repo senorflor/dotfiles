@@ -108,12 +108,6 @@ link() {
     ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
-ensure_dir() {
-    if [ ! -d "$1" ]; then
-        mkdir -p "$1"
-    fi
-}
-
 mirrorfiles() {
     # Copy `.gitconfig`.
     # Any global git commands in `~/.bash_profile.local` will be written to
