@@ -18,6 +18,7 @@
                    ;; General
                       auto-complete
                       color-theme-solarized
+                      dash-at-point
                       powerline
                       rainbow-delimiters
                       undo-tree
