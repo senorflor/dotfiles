@@ -108,6 +108,12 @@ link() {
     ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
+ensure_dir() {
+    if [ ! -d "$1" ]; then
+        mkdir -p "$1"
+    fi
+}
+
 mirrorfiles() {
     # Copy `.gitconfig`.
     # Any global git commands in `~/.bash_profile.local` will be written to
@@ -119,10 +125,10 @@ mirrorfiles() {
         rm -rf "${HOME}/.vim"
     fi
 
-    # Create the .emacs.d directory if it's not already there.
-    if [ ! -d "${HOME}/.emacs.d" ]; then
-        mkdir "${HOME}/.emacs.d"
-    fi
+    # Create the .emacs.d and .lein directories if not already there.
+    ensure_dir "${HOME}/.emacs.d"
+    ensure_dir "${HOME}/.lein"
+
 
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
@@ -137,6 +143,7 @@ mirrorfiles() {
     link "vim"                ".vim"
     link "vim/gvimrc"         ".gvimrc"
     link "vim/vimrc"          ".vimrc"
+    link "lein/profiles.clj"  "profiles.clj"
 
     e_success "Dotfiles update complete!"
 }
