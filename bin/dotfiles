@@ -103,6 +103,13 @@ else
     run_npm
 fi
 
+# Ensure lein is there and update it:
+if ! type_exists "lein"; then
+    ensure_dir "${HOME}/bin"
+    curl -o "${HOME}/bin/lein" https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    chmod a+x "${HOME}/bin/lein"
+fi
+
 link() {
     # Force create/replace the symlink.
     ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
@@ -137,7 +144,7 @@ mirrorfiles() {
     link "vim"                ".vim"
     link "vim/gvimrc"         ".gvimrc"
     link "vim/vimrc"          ".vimrc"
-    link "lein/profiles.clj"  "profiles.clj"
+    link "lein/profiles.clj"  ".lein/profiles.clj"
 
     # iTerm won't pick up a dot-prefixed file for whatever reason
     link "iterm/solarized.dark.itermcolors.txt" "solarized.dark.itermcolors.txt"
