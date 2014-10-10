@@ -19,9 +19,12 @@
                       auto-complete
                       color-theme-solarized
                       dash-at-point
+                      dirtree
                       powerline
                       rainbow-delimiters
+                      tree-mode
                       undo-tree
+                      windata
                       yaml-mode
                       yasnippet
 
@@ -73,6 +76,10 @@
 ;;; Snippets
 (require 'yasnippet)
 (yas-global-mode 1)
+
+;;; dirtree
+(require 'dirtree)
+
 
 ;;; Clojure
 (add-hook 'clojure-mode-hook 'paredit-mode)
