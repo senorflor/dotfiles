@@ -43,6 +43,10 @@
                    ;; Java
                       malabar-mode
 
+                   ;; Javascript
+                      jsx-mode
+                      react-snippets
+
                    ;; Markdown
                       markdown-mode
 
@@ -106,6 +110,14 @@
 (require 'malabar-mode)
 (setq malabar-groovy-lib-dir "~/.emacs.d/malabar-1.5.0-SNAPSHOT/lib/")
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+
+;;; Javascript
+;; React
+(require 'react-snippets)
+;; it's just JSX, don't overreact
+(require 'jsx-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
+(autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 
 ;;; org mode!
 (require 'org-install)
