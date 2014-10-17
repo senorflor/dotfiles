@@ -140,6 +140,7 @@ mirrorfiles() {
     link "emacs/init.el"      ".emacs.d/init.el"
     link "git/gitattributes"  ".gitattributes"
     link "git/gitignore"      ".gitignore"
+    link "slate/slate"        ".slate"
     link "tmux/tmux.conf"     ".tmux.conf"
     link "vim"                ".vim"
     link "vim/gvimrc"         ".gvimrc"
