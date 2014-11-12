@@ -43,7 +43,7 @@ alias bytes="stat -f%40N\ %z"
 alias nodots="ls *([^.])"
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ip="curl icanhazip.com"
 alias localip="ipconfig getifaddr en1"
 
 # Copy my public key to the pasteboard
