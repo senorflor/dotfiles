@@ -141,8 +141,15 @@
 (global-set-key (kbd "C-c C-M-s") 'enlighten)
 
 ;;; haskell
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook
+          (lambda () (interactive)
+            (local-set-key (kbd "TAB") (kbd "SPC SPC"))
+            (kill-local-variable 'indent-line-function)
+            (set (make-local-variable 'indent-line-function)
+                                  'indent-relative)))
 (add-to-list 'completion-ignored-extensions ".hi")
+
 
 
 ;;; dash-at-point
