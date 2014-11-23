@@ -2,29 +2,16 @@
 # If no ~/.slate file exists this is the file that will be used.
 
 config defaultToCurrentScreen true
-config nudgePercentOf screenSize
-config resizePercentOf screenSize
 
-# Fullscreen
-bind up:ctrl;alt move 0;0 screenSizeX;screenSizeY
+# Switch monitors
+bind up:ctrl;alt throw above
+bind down:ctrl;alt throw below
+
+# Full Screen
+bind space:ctrl;alt move screenOriginX;screenOriginY screenSizeX;screenSizeY
 
 # Left Half
-bind left:ctrl;alt move 0;0 screenSizeX/2;screenSizeY
+bind left:ctrl;alt move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
 
 # Right Half
-bind right:ctrl;alt move screenSizeX/2;0 screenSizeX/2;screenSizeY
-
-# Top Left Quarter
-bind left:alt;shift;ctrl move 0;0 screenSizeX/2;screenSizeY/2
-
-# Top Right Quarter
-bind up:alt;shift;ctrl move screenSizeX/2;0 screenSizeX/2;screenSizeY/2
-
-# Bottom Left Quarter
-bind down:alt;shift;ctrl move 0;screenSizeY/2 screenSizeX/2;screenSizeY/2
-
-# Bottom Right Quarter
-bind right:alt;shift;ctrl move screenSizeX/2;screenSizeY/2 screenSizeX/2;screenSizeY/2
-
-# Window Hints
-bind esc:ctrl;alt hint
+bind right:ctrl;alt move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
