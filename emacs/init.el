@@ -44,6 +44,8 @@
                       malabar-mode
 
                    ;; Javascript
+                      js2-mode
+                      ac-js2
                       jsx-mode
                       react-snippets
 
@@ -118,6 +120,11 @@
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
+;;
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(custom-set-variables
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t))
 
 ;;; org mode!
 (require 'org-install)
