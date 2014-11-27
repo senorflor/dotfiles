@@ -64,6 +64,13 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; global setup
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+  (when (fboundp mode) (funcall mode -1)))
+(setq inhibit-startup-screen t)
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+      backup-directory-alist `((".*" . ,temporary-file-directory)))
+
 ;;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
