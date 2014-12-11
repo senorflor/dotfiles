@@ -1,2 +1,3 @@
 # Aliases for Eli
 alias sing="say -v pipe"
+alias speak="say -r 2 -v zarvox santa claus mickey mouse santa claus mickey mouse santa whats in your sleigh mickey whats in your clubhouse"
