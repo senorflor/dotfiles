@@ -25,3 +25,9 @@ export MANPAGER="less -X"
 # Make new shells get the history lines from all previous
 # shells instead of the default "last window closed" history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# Dirty, dirty virtualenv
+if [[ -r "/usr/local/bin/virtualenvwrapper.sh" ]]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/projects
+fi

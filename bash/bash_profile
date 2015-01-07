@@ -11,6 +11,7 @@ declare -a files=(
     $HOME/.dotfiles/bash/bash_prompt # Custom bash prompt
     $HOME/.bash_profile.local # Local and private settings not under version control (e.g. git credentials)
     $HOME/.dotfiles/bash/bash_paths # Path modifications (must source after `.bash_profile.local` in case of custom `brew` location)
+    /usr/local/bin/virtualenvwrapper.sh # Python virtualenvwrapper
 )
 
 # If these files are readable, source them
