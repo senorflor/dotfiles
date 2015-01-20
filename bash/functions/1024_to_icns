@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 png_to_icns() {
   local usage="usage: png_to_icons <a_1024_x_1024px_png_file.png>"
