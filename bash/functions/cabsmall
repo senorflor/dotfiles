@@ -60,6 +60,6 @@ main :: IO ()
 main = return ()
 ' > "$name/Main.hs"
   
-  (cd $name && cabal sandbox init)
+  (cd $name && cabal sandbox init && cabal install -j7 --only-dependencies) &
   echo "Reminder: cabal sandbox config paths are hardcoded--do not move your new project!"
 }
