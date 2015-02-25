@@ -32,3 +32,6 @@
 [submodule "vim/bundle/vim-javascript"]
 	path = vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "emacs/emacs-color-theme-solarized"]
+	path = emacs/emacs-color-theme-solarized
+	url = git@github.com:sellout/emacs-color-theme-solarized.git
