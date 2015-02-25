@@ -1,32 +1,21 @@
+(require 'cl)
+
 ;;; Slather with elisp
-(require 'package)
+(load "package")
+(package-initialize)
 (add-to-list 'package-archives
   '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
+(setq package-archive-enable-alist '(("melpa" deft magit)))
 
-(when (not package-archive-contents)
-    (package-refresh-contents))
-
-(defvar my-packages '(starter-kit
-                      starter-kit-bindings
-                      starter-kit-lisp
-                      starter-kit-js
-                      starter-kit-ruby
-
+(defvar my-packages '(
                    ;; General
                       auto-complete
-                      color-theme-solarized
-                      dash-at-point
-                      dirtree
-                      powerline
+                      org
                       rainbow-delimiters
-                      tree-mode
                       undo-tree
-                      windata
                       yaml-mode
-                      yasnippet
 
                    ;; Clojure
                       ac-cider
@@ -40,36 +29,49 @@
                    ;; Haskell
                       haskell-mode
 
-                   ;; Java
-                      malabar-mode
-
                    ;; Javascript
-                      js2-mode
-                      ac-js2
                       jsx-mode
-                      react-snippets
 
                    ;; Markdown
                       markdown-mode
 
                    ;; Project nav
-                      ack-and-a-half
-                      projectile
-
-                   ;; R
-                      ess)
+                      projectile)
   "Packages required at launchtime")
 
+(when (not package-archive-contents)
+  (package-refresh-contents))
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Initialize color-theme and load solarized
+(require 'color-theme)
+(color-theme-initialize)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized" t)
+
 ;; global setup
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
-(setq inhibit-startup-screen t)
-(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-      backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
+      initial-major-mode 'org-mode)
+(when window-system
+  (setq frame-title-format '(buffer-file-name "%f" ("%b"))))
+(setq tab-width 2
+      standard-indent 2
+      indent-tabs-mode nil)
+(setq make-backup-files nil)
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(defalias 'yes-or-no-p 'y-or-n-p)
+(setq echo-keystrokes 0.1
+      use-dialog-box nil
+      visible-bell t)
+(delete-selection-mode t)
+
+;;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;;; undo-tree
 (require 'undo-tree)
@@ -79,21 +81,6 @@
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-;;; ido mode
-(require 'ido)
-(ido-mode t)
-
-;;; powerline
-(require 'powerline)
-
-;;; Snippets
-(require 'yasnippet)
-(yas-global-mode 1)
-
-;;; dirtree
-(require 'dirtree)
-
-
 ;;; Clojure
 (add-hook 'clojure-mode-hook 'paredit-mode)
 ;; Clojurescript/EDN highlighting
@@ -101,37 +88,25 @@
 (setq auto-mode-alist (cons '("\\.cljs$" . clojure-mode) auto-mode-alist))
 ;;; cider config
 (require 'ac-cider)
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook #'eldoc-mode)
 (add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-
-;;; Java
-(add-hook 'java-mode-hook
-          (lambda ()
-            (setq c-basic-offset 2)))
-(add-to-list 'load-path "~/.emacs.d/malabar-1.5.0-SNAPSHOT/lisp/")
-(setq semantic-default-submodes '(global-semantic-idle-scheduler-mode
-                                  global-semanticdb-minor-mode
-                                  global-semantic-idle-summary-mode
-                                  global-semantic-mru-bookmark-mode))
-(semantic-mode 1)
-(require 'malabar-mode)
-(setq malabar-groovy-lib-dir "~/.emacs.d/malabar-1.5.0-SNAPSHOT/lib/")
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+(setq nrepl-hide-special-buffers t)
+(setq nrepl-log-messages t)
+(setq cider-show-error-buffer 'only-in-repl)
 
 ;;; Javascript
+(defun js-custom ()
+  "js-mode-hook"
+  (setq js-indent-level 2))
+(add-hook 'js-mode-hook 'js-custom)
 ;; React
 (require 'react-snippets)
 ;; it's just JSX, don't overreact
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
 (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
-;;
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(custom-set-variables
- '(js2-basic-offset 2)
- '(js2-bounce-indent-p t))
 
 ;;; org mode!
 (require 'org-install)
@@ -148,7 +123,7 @@
 (ac-config-default)
 
 ;;; solarized
-(load-theme 'solarized-dark t)
+(load-theme 'solarized t)
 (defun endarken () (interactive) (load-theme 'solarized-dark t))
 (defun enlighten () (interactive) (load-theme 'solarized-light t))
 (global-set-key (kbd "C-c s") 'endarken)
@@ -186,19 +161,6 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror)
 
-
-
-;;; dash-at-point
-(require 'dash-at-point)
-(global-set-key "\C-c\C-\M-d" 'dash-at-point)
-
-;;; detab, and tab = 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq standard-indent 2)
-;; no tabs by default. modes that really need tabs should enable
-;; indent-tabs-mode explicitly. makefile-mode already does that, for
-;; example.
-
 ;;; Line numbering
 ;;; (from http://www.emacswiki.org/LineNumbers)
 (defvar my-linum-format-string "%4d")
@@ -212,10 +174,6 @@
 (defun my-linum-format (line-number)
      (propertize (format my-linum-format-string line-number) 'face 'linum))
 (global-linum-mode 1)
-
-;;; backup files in a backup directory:
-(setq backup-directory-alist `(("." . "~/.saved.emacs")))
-(setq backup-by-copying t)
 
 ;;; Projectile everywhere
 (require 'projectile)
