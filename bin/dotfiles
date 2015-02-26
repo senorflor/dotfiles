@@ -121,13 +121,15 @@ mirrorfiles() {
     # `.gitconfig`. This prevents them being committed to the repository.
     rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
 
-    # Force remove the vim directory if it's already there.
+    # Force remove the vim/emacs directories if already there.
     if [ -e "${HOME}/.vim" ]; then
         rm -rf "${HOME}/.vim"
     fi
+    if [ -e "${HOME}/.emacs.d" ]; then
+        rm -rf "${HOME}/.emacs.d"
+    fi
 
     # Create the .emacs.d and .lein directories if not already there.
-    ensure_dir "${HOME}/.emacs.d"
     ensure_dir "${HOME}/.lein"
 
 
@@ -137,7 +139,7 @@ mirrorfiles() {
     link "bash/bashrc"        ".bashrc"
     link "bash/bash_profile"  ".bash_profile"
     link "bash/inputrc"       ".inputrc"
-    link "emacs/init.el"      ".emacs.d/init.el"
+    link "emacs"              ".emacs.d"
     link "git/gitattributes"  ".gitattributes"
     link "git/gitignore"      ".gitignore"
     link "slate/slate"        ".slate"

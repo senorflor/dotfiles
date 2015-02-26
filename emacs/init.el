@@ -1,27 +1,29 @@
-(require 'cl)
-
 ;;; Slather with elisp
-(load "package")
-(package-initialize)
+(require 'package)
 (add-to-list 'package-archives
   '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (setq package-archive-enable-alist '(("melpa" deft magit)))
+(package-initialize)
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
-(defvar my-packages '(
-                   ;; General
-                      auto-complete
-                      org
+(defvar my-packages '(org
+                      color-theme-solarized
+                      dash
                       rainbow-delimiters
                       undo-tree
+
+                   ;; Formats
+                      markdown-mode
                       yaml-mode
 
                    ;; Clojure
                       ac-cider
+                      cider
                       clojure-mode
                       clojurescript-mode
-                      cider
 
                    ;; Go
                       go-mode
@@ -32,23 +34,13 @@
                    ;; Javascript
                       jsx-mode
 
-                   ;; Markdown
-                      markdown-mode
-
                    ;; Project nav
                       projectile)
   "Packages required at launchtime")
 
-(when (not package-archive-contents)
-  (package-refresh-contents))
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
-;; Initialize color-theme and load solarized
-(require 'color-theme)
-(color-theme-initialize)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized" t)
 
 ;; global setup
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
@@ -76,7 +68,6 @@
 ;;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
-
 ;;; rainbow parens
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -101,8 +92,6 @@
   "js-mode-hook"
   (setq js-indent-level 2))
 (add-hook 'js-mode-hook 'js-custom)
-;; React
-(require 'react-snippets)
 ;; it's just JSX, don't overreact
 (require 'jsx-mode)
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
@@ -124,42 +113,43 @@
 
 ;;; solarized
 (load-theme 'solarized t)
-(defun endarken () (interactive) (load-theme 'solarized-dark t))
-(defun enlighten () (interactive) (load-theme 'solarized-light t))
-(global-set-key (kbd "C-c s") 'endarken)
-(global-set-key (kbd "C-c C-M-s") 'enlighten)
+(add-hook 'after-make-frame-functions
+	  (lambda (frame)
+	    (set-frame-parameter frame
+				 'background-mode
+				 (if (display-graphic-p frame) 'light 'dark))
+	                (enable-theme 'solarized)))
+;; ;;; haskell
+;; ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (add-hook 'haskell-mode-hook
+;;           (lambda () (interactive)
+;;             (local-set-key (kbd "TAB") (kbd "SPC SPC"))
+;;             (kill-local-variable 'indent-line-function)
+;;             (set (make-local-variable 'indent-line-function)
+;;                                   'indent-relative)))
+;; (add-to-list 'completion-ignored-extensions ".hi")
 
-;;; haskell
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook
-          (lambda () (interactive)
-            (local-set-key (kbd "TAB") (kbd "SPC SPC"))
-            (kill-local-variable 'indent-line-function)
-            (set (make-local-variable 'indent-line-function)
-                                  'indent-relative)))
-(add-to-list 'completion-ignored-extensions ".hi")
-
-;; EL-GET
-(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-(defun el-get-sync-recipes (overlay)
-  (let* ((recipe-glob (locate-user-emacs-file (concat overlay "/recipes/*.rcp")))
-         (recipe-files (file-expand-wildcards recipe-glob))
-         (recipes (mapcar 'el-get-read-recipe-file recipe-files)))
-    (mapcar (lambda (r) (add-to-list 'el-get-sources r)) recipes)
-    (el-get 'sync (mapcar 'el-get-source-name recipes))))
-(setq el-get-user-package-directory user-emacs-directory)
-;; EL-GET SYNC OVERLAYS
-(el-get-sync-recipes "el-get-haskell")
-(el-get-sync-recipes "el-get-user")
-;; CUSTOM FILE
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(load custom-file 'noerror)
+;; ;; EL-GET
+;; (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+;; (unless (require 'el-get nil 'noerror)
+;;   (with-current-buffer
+;;       (url-retrieve-synchronously
+;;        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+;;     (goto-char (point-max))
+;;     (eval-print-last-sexp)))
+;; (defun el-get-sync-recipes (overlay)
+;;   (let* ((recipe-glob (locate-user-emacs-file (concat overlay "/recipes/*.rcp")))
+;;          (recipe-files (file-expand-wildcards recipe-glob))
+;;          (recipes (mapcar 'el-get-read-recipe-file recipe-files)))
+;;     (mapcar (lambda (r) (add-to-list 'el-get-sources r)) recipes)
+;;     (el-get 'sync (mapcar 'el-get-source-name recipes))))
+;; (setq el-get-user-package-directory user-emacs-directory)
+;; ;; EL-GET SYNC OVERLAYS
+;; (el-get-sync-recipes "el-get-haskell")
+;; (el-get-sync-recipes "el-get-user")
+;; ;; CUSTOM FILE
+;; (setq custom-file (locate-user-emacs-file "custom.el"))
+;; (load custom-file 'noerror)
 
 ;;; Line numbering
 ;;; (from http://www.emacswiki.org/LineNumbers)
