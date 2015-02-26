@@ -61,6 +61,7 @@
       use-dialog-box nil
       visible-bell t)
 (delete-selection-mode t)
+(put 'downcase-region 'disabled nil)
 
 ;;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -68,6 +69,7 @@
 ;;; undo-tree
 (require 'undo-tree)
 (global-undo-tree-mode)
+
 ;;; rainbow parens
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -113,14 +115,8 @@
 
 ;;; solarized
 (load-theme 'solarized t)
-(add-hook 'after-make-frame-functions
-	  (lambda (frame)
-	    (set-frame-parameter frame
-				 'background-mode
-				 (if (display-graphic-p frame) 'light 'dark))
-	                (enable-theme 'solarized)))
+
 ;;; haskell
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook
           (lambda () (interactive)
             (local-set-key (kbd "TAB") (kbd "SPC SPC"))
@@ -146,4 +142,3 @@
 ;;; Projectile everywhere
 (require 'projectile)
 (projectile-global-mode)
-(put 'downcase-region 'disabled nil)
