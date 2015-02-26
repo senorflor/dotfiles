@@ -119,37 +119,15 @@
 				 'background-mode
 				 (if (display-graphic-p frame) 'light 'dark))
 	                (enable-theme 'solarized)))
-;; ;;; haskell
-;; ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;; (add-hook 'haskell-mode-hook
-;;           (lambda () (interactive)
-;;             (local-set-key (kbd "TAB") (kbd "SPC SPC"))
-;;             (kill-local-variable 'indent-line-function)
-;;             (set (make-local-variable 'indent-line-function)
-;;                                   'indent-relative)))
-;; (add-to-list 'completion-ignored-extensions ".hi")
-
-;; ;; EL-GET
-;; (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
-;; (unless (require 'el-get nil 'noerror)
-;;   (with-current-buffer
-;;       (url-retrieve-synchronously
-;;        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-;;     (goto-char (point-max))
-;;     (eval-print-last-sexp)))
-;; (defun el-get-sync-recipes (overlay)
-;;   (let* ((recipe-glob (locate-user-emacs-file (concat overlay "/recipes/*.rcp")))
-;;          (recipe-files (file-expand-wildcards recipe-glob))
-;;          (recipes (mapcar 'el-get-read-recipe-file recipe-files)))
-;;     (mapcar (lambda (r) (add-to-list 'el-get-sources r)) recipes)
-;;     (el-get 'sync (mapcar 'el-get-source-name recipes))))
-;; (setq el-get-user-package-directory user-emacs-directory)
-;; ;; EL-GET SYNC OVERLAYS
-;; (el-get-sync-recipes "el-get-haskell")
-;; (el-get-sync-recipes "el-get-user")
-;; ;; CUSTOM FILE
-;; (setq custom-file (locate-user-emacs-file "custom.el"))
-;; (load custom-file 'noerror)
+;;; haskell
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook
+          (lambda () (interactive)
+            (local-set-key (kbd "TAB") (kbd "SPC SPC"))
+            (kill-local-variable 'indent-line-function)
+            (set (make-local-variable 'indent-line-function)
+                                  'indent-relative)))
+(add-to-list 'completion-ignored-extensions ".hi")
 
 ;;; Line numbering
 ;;; (from http://www.emacswiki.org/LineNumbers)
