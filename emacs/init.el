@@ -9,10 +9,13 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(org
+(defvar my-packages '(
+                   ;; General
                       color-theme-solarized
                       dash
+                      org
                       rainbow-delimiters
+
                       undo-tree
 
                    ;; Formats
