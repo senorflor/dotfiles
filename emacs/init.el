@@ -11,7 +11,6 @@
 
 (defvar my-packages '(
                    ;; General
-                      color-theme-solarized
                       dash
                       org
                       rainbow-delimiters
