@@ -31,6 +31,9 @@
     # Custom pretty log
     logp = log --pretty=nice --date-order
 
+    # Last few modified branches
+    recent = !git for-each-ref --count=10 --sort=-committerdate refs/heads --format='%(refname:short), edited %(committerdate:relative)'
+
     # Diffstat log
     logst = log --stat
     # Short format diffstat log
@@ -38,7 +41,7 @@
 
     # Find out who is currently active on the repository
     # Displays committers in descending order of number of commits
-    who = shortlog --numbered --summary --email --no-merges --since="3 months"
+    who = shortlog --numbered --summary --email --no-merges --since='3 months'
 
     # Inverse of add
     unadd = reset HEAD
