@@ -31,7 +31,7 @@ run_brew() {
             'rbenv'
             'tree'
             'wget'
-            'emacs --cocoa --with-gnutls --srgb'
+            'emacs --with-cocoa --with-gnutls --srgb'
             'https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb' # Avoid using any custom OS X version of rsync
         )
 
