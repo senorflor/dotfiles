@@ -54,6 +54,17 @@ run_brew() {
             [[ $? ]] && e_success "Done"
         fi
 
+        # FIXME: Quick-n-dirty homebrew cask action until can add a suitable check for existence, etc.
+        e_header "Installing/updating Homebrew-Cask..."
+        [[ -d "/usr/local/Cellar/brew-cask" ]] || brew install caskroom/cask/brew-cask
+        brew upgrade brew-cask
+        e_header "Installing Apps"
+        brew cask install google-chrome
+        brew cask install iterm2
+        brew cask install karabiner
+        brew cask install slate
+
+
         # Remove outdated versions from the Cellar
         # brew cleanup # will do this manually instead, e.g. after
                        # migrating postgres.
