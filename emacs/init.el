@@ -14,18 +14,22 @@
                       dash
                       org
                       rainbow-delimiters
-
                       undo-tree
 
                    ;; Formats
                       markdown-mode
                       yaml-mode
 
+		   ;; Java
+		      ;; malabar-mode
+		      groovy-mode
+
                    ;; Clojure
                       ac-cider
                       cider
                       clojure-mode
                       clojurescript-mode
+		      paredit
 
                    ;; Go
                       go-mode
@@ -75,6 +79,21 @@
 ;;; rainbow parens
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;;; Java: 2-space indent
+(add-hook 'java-mode-hook
+	  (lambda ()
+	    (setq
+	     c-basic-offset
+	     2)))
+;; (require 'malabar-mode)
+;; (load-file "~/projects/cedet/cedet-devel-load.el")
+;; (add-hook 'after-init-hook (lambda ()
+;; 			     (message "activate-malabar-mode")
+;; 			     (activate-malabar-mode)))
+
+;; (add-hook 'malabar-java-mode-hook 'flycheck-mode)
+;; (add-hook 'malabar-groovy-mode-hook 'flycheck-mode)
 
 ;;; Clojure
 (add-hook 'clojure-mode-hook 'paredit-mode)
