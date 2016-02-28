@@ -21,6 +21,7 @@ declare -a dirs_to_append=(
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
     "$HOME/.cabal/bin"
     "$GOPATH/bin"
+    "$(brew --prefix)/opt/go/libexec/bin"
 )
 
 # Prepend directories to PATH
