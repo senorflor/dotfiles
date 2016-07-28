@@ -40,6 +40,9 @@
                    ;; Javascript
                       jsx-mode
 
+		    ;; Elm
+		      elm-mode
+
                    ;; Project nav
                       projectile)
   "Packages required at launchtime")
