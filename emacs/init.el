@@ -59,9 +59,6 @@
       initial-major-mode 'org-mode)
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b"))))
-(setq tab-width 2
-      standard-indent 2
-      indent-tabs-mode nil)
 (setq make-backup-files nil)
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
@@ -71,6 +68,9 @@
       visible-bell t)
 (delete-selection-mode t)
 (put 'downcase-region 'disabled nil)
+(setq-default tab-width 2
+	      standard-indent 2
+	      indent-tabs-mode nil)
 
 ;;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
